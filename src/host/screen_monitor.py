@@ -1,17 +1,17 @@
 import pyautogui
 import time
 import os
-from utils import refresh
+from wechat_scraper.host.utils import refresh
 
 # Path to the screenshot image file (template to match on the screen)
-account = input("Please input account name: ")
-screenshot_path = f'fig/{account}.png'  # Replace with your screenshot file path
+account = input('Please input account name: ')
+account_fig_path = os.path.join(os.path.dirname(__file__), f'../figures/{account}.png')
 
 #refresh()
 
 try:
     # Locate the screenshot element on the screen
-    location = pyautogui.locateOnScreen(screenshot_path)
+    location = pyautogui.locateOnScreen(account_fig_path)
     print(location)
     if location is not None:
         # Get the center coordinates of the located element
@@ -19,9 +19,9 @@ try:
         
         # Move the mouse to the center of the located element
         pyautogui.moveTo(center_x, center_y, duration=0.5)  # duration adds a smooth movement effect
-        print(f"Mouse moved to {center_x}, {center_y}")
+        print(f'Mouse moved to {center_x}, {center_y}')
     else:
-        print("Element not found on the screen. Make sure the element is visible.")
+        print('Element not found on the screen. Make sure the element is visible.')
 except Exception as e:
-    print(f"An error occurred: {e}")
+    print(f'An error occurred: {e}')
 

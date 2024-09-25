@@ -1,25 +1,24 @@
-# monitor_traffic.py
 from mitmproxy import ctx
 from threading import Timer
 import time
 
 # Define the strings to search for
-wechat = "mp.weixin.com"
-target = ["getappmsgext", "biz", "key", "pass_ticket"]
+wechat = 'mp.weixin.com'
+target = ['getappmsgext', 'biz', 'key', 'pass_ticket']
 
 # Event to handle the monitoring state
 wechat_detected = False
 target_detected = False
 
 def target_detect():
-    """Waits for 10 seconds to check if target links appears after wechat general links."""
+    '''Waits for 10 seconds to check if target links appears after wechat general links.'''
     global target_detected
-    print("Waiting 10 seconds to check for target links...")
+    print('Waiting 10 seconds to check for target links...')
     time.sleep(10)
     if target_detected:
-        print("Target detected. Proceed to scraping.")
+        print('Target detected. Proceed to scraping.')
     else:
-        print("Target not detected. WeChat version error.")
+        print('Target not detected. WeChat version error.')
     ctx.master.shutdown()
 
 class Requests:

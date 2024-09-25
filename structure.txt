@@ -1,0 +1,45 @@
+wechat_scraper/
+├── src/
+│   └── wechat_scraper/
+│       ├── __init__.py
+│       ├── host/
+│       │   ├── log.json
+│       │   ├── offset.json
+│       │   ├── wechat_scraper.py
+│       │   ├── screen_capture.py
+│       │   ├── screen_monitor.py
+│       │   ├── tor_tester.py
+│       │   ├── utils.py
+│       │   └── ...
+│       ├── virtualbox/
+│       │   ├── mitm_activity_monitor.py
+│       │   ├── wechat_compatibility_checker.py
+│       │   ├── param_retriever.py
+│       │   ├── mitm_proxy_manager.py
+│       │   ├── params.json
+│       │   └── ...
+│       ├── data/
+│       │   ├── raw/
+│       │   ├── processed/
+│       │   └── ...
+│       ├── figures/
+│       │   ├── plots/
+│       │   ├── screenshots/
+│       │   └── ...
+│       ├── configs/
+│       │   ├── offset.json
+│       │   ├── config.json
+│       │   └── ...
+│       └── tests/
+│           ├── test_wechat_scraper.py
+│           ├── test_param_retriever.py
+│           ├── test_screen_monitor.py
+│           └── ...
+├── scripts/
+│   ├── setup_virtualbox.sh
+│   ├── install_dependencies.sh
+│   └── ...
+├── .gitignore
+├── LICENSE
+├── README.md
+└── requirements.txt

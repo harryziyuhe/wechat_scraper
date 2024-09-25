@@ -11,11 +11,11 @@ class UserData:
     
     def toJson(self):
         return {
-            "biz": self.biz,
-            "uin": self.uin,
-            "key": self.key,
-            "pass_ticket": self.pass_ticket,
-            "cookie": self.cookie
+            'biz': self.biz,
+            'uin': self.uin,
+            'key': self.key,
+            'pass_ticket': self.pass_ticket,
+            'cookie': self.cookie
         }
     
     @staticmethod
@@ -25,28 +25,28 @@ class UserData:
 class Requests:
 
     def request(self, flow):
-        # The mitm code will fuction when if we set target = "getappmsgext", but during the scraping process 
-        # the one time parameters will be overwritten because mitmproxy will detect other urls with "getappmsgext"
+        # The mitm code will fuction when if we set target = 'getappmsgext', but during the scraping process 
+        # the one time parameters will be overwritten because mitmproxy will detect other urls with 'getappmsgext'
         # that do not include the parameters we need, so to avoid this confusion we can set target to a list
         # that includes other key parameter names as well.
-        # target = "getappmsgext"
-        target = ["getappmsgext", "biz", "key", "pass_ticket"]
+        # target = 'getappmsgext'
+        target = ['getappmsgext', 'biz', 'key', 'pass_ticket']
         if all(keyword in flow.request.url for keyword in target):
             
             # read cookie
-            cookie = ""
+            cookie = ''
             for item in flow.request.cookies.fields:
                 key = item[0]
                 value = item[1]
-                cookie += key + "=" + value + ";"
+                cookie += key + '=' + value + ';'
             
             # read parameters
             parsed_url = urlparse(flow.request.url)
             query_params = parse_qs(parsed_url.query)
-            biz = ""
-            uin = ""
-            pass_ticket = ""
-            key = ""
+            biz = ''
+            uin = ''
+            pass_ticket = ''
+            key = ''
             try:
                 biz = query_params['__biz'][0]
                 uin = query_params['uin'][0]
@@ -56,7 +56,9 @@ class Requests:
                 print(e)
             user = UserData(biz, uin, key, pass_ticket, cookie)
 
-            with open("Z:\\params.json", mode="w", encoding="utf-8") as f:
+            param_path = os.path.join(os.path.dirname(__file__), 'params.json')
+
+            with open(param_path, 'w', encoding='utf-8') as f:
                 f.write(json.dumps(user.toJson(), indent = 4))
 
 addons = [
