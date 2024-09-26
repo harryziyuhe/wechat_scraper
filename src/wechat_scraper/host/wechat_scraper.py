@@ -8,6 +8,7 @@ from urllib.parse import urlparse, parse_qs
 from bs4 import BeautifulSoup
 import pandas as pd
 import random
+import argparse
 
 DATE_TIME_PATTERN = re.compile(r'var create_time = "(\d+)"')
 GLOBAL_PARAMS = None
@@ -285,6 +286,19 @@ def wechat_scraper(verbose = False, daymax = 2500):
         tor = True
     run(tor, daymax)
 
+def main():
+    parser = argparse.ArgumentParser(description="WeChat Scraper Command-Line Interface")
+
+    # Define command-line arguments
+    parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose mode.')
+    parser.add_argument('--daymax', type=int, default=2500, help='Maximum number of days to scrape. Default is 2500.')
+
+    # Parse the arguments
+    args = parser.parse_args()
+
+    # Call the main function with parsed arguments
+    wechat_scraper(verbose=args.verbose, daymax=args.daymax)
+
 ##################################################################
 # Pipeline 
 # 1. Set up mitmproxy to retrieve parameters in VirtualBox (retrieve_params.py)
@@ -294,5 +308,5 @@ def wechat_scraper(verbose = False, daymax = 2500):
 # 5. After each iteration, save article data into csv file for maximum record retention
 
 if __name__ == '__main__':
-    wechat_scraper()
+    main()
     
