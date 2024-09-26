@@ -1,14 +1,15 @@
 import subprocess
 import platform
 import os
+import argparse
 
 def setProxy(proxy_server):
-    '''
+    """
     Sets the system-wide browser level proxy settings based on the operating system.
 
     Args:
         proxy_server (str): The proxy server address and port, e.g. '127.0.0.1:8080' 
-    '''
+    """
     # Split the proxy server into IP and port componnets
     proxy_ip, proxy_port = proxy_server.split(':')
 
@@ -109,9 +110,9 @@ def setProxy(proxy_server):
         print('Unsupported operating system.')
 
 def clearProxy():
-    '''
+    """
     Clears the proxy settings based on the operating system.
-    '''
+    """
     # Detect the operating system
     os_type = platform.system()
 
@@ -162,13 +163,13 @@ def clearProxy():
 
 
 def proxyThread(port = '8888', quiet = False):
-    '''
+    """
     Starts the mitmproxy process with the process settings enabled.
 
     Args:
         port (str): The port on which mitmproxy will run.
         quiet (bool): Whether to run mitmproxy in quiet mode.
-    '''
+    """
     global mitmprocess
 
     # Set the proxy to redirect traffic to mitmproxy
@@ -183,22 +184,16 @@ def proxyThread(port = '8888', quiet = False):
         mitmprocess = subprocess.Popen(['mitmdump', '-s', mitmproxy_path, '-p', port])
 
 def stopProxy():
-    '''
+    """
     Stops the mitmproxy process and clears settings.
-    '''
+    """
     if 'mitmprocess' in globals():
         mitmprocess.terminate()  # Terminate the mitmproxy process
         mitmprocess.wait()  # Wait for the process to finish
         print('mitmproxy terminated.')
     clearProxy()  # Clear proxy settings after stopping mitmproxy
 
-if __name__ == '__main__':
-    # Ask user if mitmproxy should be run in quiet mode
-    quiet = input('Do you want to run mitmproxy in quiet mode?Y/n: ').upper()
-    if (quiet == 'N') or (quiet == 'No'):
-        quiet = False
-    else:
-        quiet = True
+def retrieve_params(quiet = False):
     
     try:
         # Start the proxy thread
@@ -207,3 +202,15 @@ if __name__ == '__main__':
     except:
         # Stop the proxy and clean up if encounters exception (e.g. Keyboard Interferance)
         stopProxy()
+
+def main():
+    parser = argparse.ArgumentParser(description="Run retrieve_params with optional quiet mode.")
+    parser.add_argument('-q', '--quiet', action='store_true', help='Run in quiet mode.')
+    
+    args = parser.parse_args()
+    
+    retrieve_params(quiet=args.quiet)
+
+if __name__ == '__main__':
+    # Ask user if mitmproxy should be run in quiet mode
+    main()
