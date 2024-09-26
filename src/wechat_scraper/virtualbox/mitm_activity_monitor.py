@@ -11,7 +11,9 @@ wechat_detected = False
 target_detected = False
 
 def target_detect():
-    '''Waits for 10 seconds to check if target links appears after wechat general links.'''
+    """
+    Waits for 10 seconds to check if target links appears after wechat general links.
+    """
     global target_detected
     print('Waiting 10 seconds to check for target links...')
     time.sleep(10)
