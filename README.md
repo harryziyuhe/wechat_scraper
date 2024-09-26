@@ -29,9 +29,9 @@ WeChat Scraper is a Python package designed to automate the scraping of WeChat d
 
 To install the package, clone the repository and use the following command:
 
-\`\`\`bash
+```bash
 pip install .
-\`\`\`
+```
 
 This will install the package and its dependencies on your host machine.
 
@@ -43,9 +43,9 @@ This will install the package and its dependencies on your host machine.
 
    If you're using Linux or macOS, you can automate the setup of VirtualBox and the Windows VM by running the following command:
 
-   \`\`\`bash
+   ```bash
    setup-vm
-   \`\`\`
+   ```
 
    This command will:
    - Install VirtualBox on your host machine.
@@ -71,7 +71,7 @@ If you are using a Windows host machine:
 
 3. **Set Up the VM**:
 
-   Follow the instructions in the setup script (\`setup/setup_virtualbox_and_vm.sh\`) to manually create and configure the VM.
+   Follow the instructions in the setup script (`setup/setup_virtualbox_and_vm.sh`) to manually create and configure the VM.
 
 ## Running the Package
 
@@ -79,64 +79,64 @@ If you are using a Windows host machine:
 
 After installing the package, you can use the following command to set up the VirtualBox environment:
 
-\`\`\`bash
+```bash
 setup-vm
-\`\`\`
+```
 
 This will automate the VirtualBox setup and Windows VM configuration.
 
 ### VirtualBox
 
-Once the Windows VM is set up and the shared folder is mounted (e.g., \`Z:\`), you can run the necessary scripts inside the VM.
+Once the Windows VM is set up and the shared folder is mounted (e.g., `Z:`), you can run the necessary scripts inside the VM.
 
-1. **Navigate to the \`src/wechat_scraper/virtualbox\` Directory**:
+1. **Navigate to the `src/wechat_scraper/virtualbox` Directory**:
 
-   \`\`\`bash
+   ```bash
    cd Z:\src\wechat_scraper\virtualbox
-   \`\`\`
+   ```
 
-2. **Run \`param_retriever.py\`**:
+2. **Run `param_retriever.py`**:
 
    - **Normal Execution**:
-     \`\`\`bash
+     ```bash
      python param_retriever.py
-     \`\`\`
+     ```
 
    - **Quiet Mode**:
-     \`\`\`bash
+     ```bash
      python param_retriever.py --quiet
-     \`\`\`
+     ```
      or
-     \`\`\`bash
+     ```bash
      python param_retriever.py -q
-     \`\`\`
+     ```
 
 3. **Run the WeChat Scraper on the Host Machine**:
 
    After retrieving parameters in VirtualBox, you can run the main scraper on the host machine:
 
-   \`\`\`bash
+   ```bash
    wechat-scraper --daymax=1000
-   \`\`\`
+   ```
 
-   Add \`--verbose\` if you want more detailed output.
+   Add `--verbose` if you want more detailed output.
 
 ## Usage
 
-### \`param_retriever.py\`
+### `param_retriever.py`
 
 Retrieves the necessary parameters for scraping WeChat data.
 
 - **Options**:
-  - \`-q, --quiet\`: Run the script in quiet mode (suppress non-critical output).
+  - `-q, --quiet`: Run the script in quiet mode (suppress non-critical output).
 
-### \`wechat_scraper.py\`
+### `wechat_scraper.py`
 
 Main script for scraping WeChat data. Run this on the host machine after retrieving parameters from VirtualBox.
 
 - **Options**:
-  - \`--daymax\`: Maximum number of days to scrape (default is 2500).
-  - \`-v, --verbose\`: Enable verbose mode.
+  - `--daymax`: Maximum number of days to scrape (default is 2500).
+  - `-v, --verbose`: Enable verbose mode.
 
 ## License
 
