@@ -52,14 +52,14 @@ class ArticleData:
         self.pub_time = ''
         self.scrape_time = ''
 
-def get_tor_session(tor = True):
+def get_tor_session(tor = True, password = 'secret'):
     global tor_count
     session = requests.session()
     # Tor uses the 9050 port as the default socks port
     tor_count = (tor_count + 1) % 5
     if tor:
         if tor_count == 0:
-            renew_connection()
+            renew_connection(password)
         session.proxies = {'http':  'socks5://127.0.0.1:9050',
                            'https': 'socks5://127.0.0.1:9050'}
     return session
@@ -101,9 +101,9 @@ def get_account_name(user: UserData):
     else:
         return ''
     
-def renew_connection():
+def renew_connection(password = 'secret'):
     with Controller.from_port(port=9051) as controller:
-        controller.authenticate('secret')
+        controller.authenticate(password)
         controller.signal(Signal.NEWNYM)
 
 def refresh(account_name):
