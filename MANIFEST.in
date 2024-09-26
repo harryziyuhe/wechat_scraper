@@ -1,0 +1,9 @@
+recursive-include setup *
+
+include src/wechat_scraper/data/wechat_metadata.xlsx
+
+include LICENSE
+include README.md
+include setup.py
+
+include *.txt
