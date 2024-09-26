@@ -19,16 +19,9 @@ wechat_scraper/
 │       │   ├── params.json
 │       │   └── ...
 │       ├── data/
-│       │   ├── raw/
-│       │   ├── processed/
+│       │   ├── wechat_metadata.xlsx
 │       │   └── ...
 │       ├── figures/
-│       │   ├── plots/
-│       │   ├── screenshots/
-│       │   └── ...
-│       ├── configs/
-│       │   ├── offset.json
-│       │   ├── config.json
 │       │   └── ...
 │       └── tests/
 │           ├── test_wechat_scraper.py
