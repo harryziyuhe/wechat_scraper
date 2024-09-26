@@ -22,7 +22,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'wechat-scraper=wechat_scraper.host.cli_wechat_scraper:main',  # Entry point for wechat_scraper on host
+            'wechat-scraper=wechat_scraper.host.wechat_scraper:main',  # Entry point for wechat_scraper on host
             'setup-vm=setup.setup_virtualbox_and_vm:main',  # Entry point for running the setup script
         ],
     },
